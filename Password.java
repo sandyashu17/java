@@ -15,7 +15,7 @@ int sum=0,m;
 while(n>0)
 {
 m=n%10;
-sum=sum+n;
+sum=sum+m;
 n=n/10;
 }
 System.out.print(sum);
