@@ -1,10 +1,9 @@
 import java.util.Scanner;
-class Factorial
+class Calculator
 {
 public static void main(String args[])
   {
-   int fact=1;
-   System.out.println("Enter the limit:");
+   System.out.println("Enter the Opearion:");
    Scanner sc=new Scanner(System.in);
    int n=sc.nextInt();
    
