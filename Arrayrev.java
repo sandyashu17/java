@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Numberrev
+class Arrayrev
 {
 public static void main (String []args)
 {
