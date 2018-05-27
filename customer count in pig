@@ -1,0 +1,62 @@
+Probem statement : find the total count of cust for each profession
+
+Data file : custs (location: /home/hduser/custs)
+
+
+load command
+------------
+cust = load '/home/hduser/custs' using PigStorage(',') as (custid:int, firstname:chararray, lastname:chararray, age:int, profession:chararray);
+
+to read the schema
+------------------
+describe cust;
+
+
+to see the contents of the bag
+------------------------------
+dump cust;
+
+
+mapper 
+------
+groupbyprofession = group cust by profession;
+
+
+Reducer
+-------
+countbyprofession = foreach groupbyprofession generate group, COUNT(cust);
+
+
+Sorting the data on the total count - desc
+-------------------------------------------
+orderbycount = order countbyprofession by $1 desc;
+
+
+Saving the output to local path
+-------------------------------
+store orderbycount into '/home/hduser/pig/niit2';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
