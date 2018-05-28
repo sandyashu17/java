@@ -1,0 +1,68 @@
+find the total volume for each stock ---using NYSE.csv
+
+1. load the NYSE.csv
+--------------------
+
+nyse = load '/home/hduser/NYSE.csv' using PigStorage(',') as (exch_name, stock_id:chararray, stk_dt, open, high, low, close, volume:long, adj_close);
+
+nyse10 = limit nyse 10;
+
+dump nyse10;
+
+nyse = foreach nyse generate stock_id, volume;
+
+nyse10 = limit nyse 10;
+
+dump nyse10;
+
+2. grouping the data on stock id
+--------------------------------
+groupbyid = group nyse by stock_id;
+
+describe groupbyid;
+
+
+3. Adding up all the volumes for each stock
+-------------------------------------------
+stk_volume = foreach groupbyid generate group, SUM(nyse.volume);
+
+describe stk_volume;
+
+dump stk_volume;
+
+4. sort the data on volume - desc
+----------------------------------
+orderbyvol = order stk_volume by $1 desc;
+
+dump orderbyvol;
+
+5. top 10 stock ids with highest vol
+------------------------------------
+top10 = limit orderbyvol 10;
+
+dump top10;
+
+6. store the results
+--------------------
+store top10 into '/home/hduser/pig/niit3';
+
+
+
+
+
+
+
+
+
+
+stock_id:chararray
+volume : long
+
+AEA	205500
+AEA	194300
+
+AEA, {(AEA	205500), (AEA	194300),,,,}
+
+AEA	
+
+
