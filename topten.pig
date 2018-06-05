@@ -28,7 +28,7 @@ sumbycust = foreach groupbycust generate group, ROUND_TO(SUM(txn.amount),2) as t
 orderbyamt = order sumbycust by total desc;
 
 top10 = limit orderbyamt 10;
-
+	
 --dump top10;
 
 cust = load '/home/hduser/custs' using PigStorage(',') as (custid:int, firstname:chararray, lastname:chararray, age:int, profession:chararray);
